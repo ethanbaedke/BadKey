@@ -9,6 +9,8 @@ namespace BadKey {
 
 	public:
 
+		Application();
+
 		void Run();
 
 	};

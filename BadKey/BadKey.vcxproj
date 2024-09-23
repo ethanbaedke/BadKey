@@ -80,9 +80,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\BadKey\Console.cpp" />
     <ClCompile Include="src\BadKey\Application.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\BadKey\Console.h" />
     <ClInclude Include="src\BadKey\Application.h" />
     <ClInclude Include="src\BadKey.h" />
     <ClInclude Include="src\BadKey\Engine.h" />
