@@ -1,4 +1,6 @@
 .vs/
 bin/
 bin-int/
-*.user
+BadKey.sln
+*vcxproj*
+
