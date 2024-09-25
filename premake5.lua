@@ -11,9 +11,9 @@ workspace "BadKey"
 
 outputPath = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
-project "Imagelyn"
+project "Game"
 
-    location "Imagelyn"
+    location "Game"
     kind "ConsoleApp"
     language "C++"
 
@@ -70,7 +70,7 @@ project "BadKey"
 
     postbuildcommands
     {
-        ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputPath .. "/Imagelyn")
+        ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputPath .. "/Game")
     }
 
     filter "configurations:Debug"
