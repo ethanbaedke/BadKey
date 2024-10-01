@@ -20,6 +20,8 @@ project "Imagelyn"
     targetdir ("bin/" .. outputPath .. "/%{prj.name}")
     objdir ("bin-int/" .. outputPath .. "/%{prj.name}")
 
+    cppdialect "C++17"
+
     files
     {
         "%{prj.name}/src/**.h",
