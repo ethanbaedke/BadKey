@@ -36,6 +36,13 @@ project "Game"
         "BadKey"
     }
 
+    filter "system:windows"
+    
+        defines
+        {
+            "BK_PLATFORM_WINDOWS"
+        }
+
     filter "configurations:Debug"
         defines { "BK_DEBUG" }
         symbols "On"
@@ -57,10 +64,18 @@ project "BadKey"
     targetdir ("bin/" .. outputPath .. "/%{prj.name}")
     objdir ("bin-int/" .. outputPath .. "/%{prj.name}")
 
+    pchheader "bkpch.h"
+    pchsource "BadKey/src/bkpch.cpp"
+
     files
     {
         "%{prj.name}/src/**.h",
         "%{prj.name}/src/**.cpp"
+    }
+
+    includedirs
+    {
+        "BadKey/src"
     }
 
     defines
@@ -68,10 +83,17 @@ project "BadKey"
         "BK_BUILD_DLL"
     }
 
-    postbuildcommands
-    {
-        ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputPath .. "/Game")
-    }
+    filter "system:windows"
+
+        defines
+        {
+            "BK_PLATFORM_WINDOWS"
+        }
+
+        postbuildcommands
+        {
+            ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputPath .. "/Game")
+        }
 
     filter "configurations:Debug"
         defines { "BK_DEBUG" }

@@ -1,7 +1,11 @@
 #pragma once
 
-#ifdef BK_BUILD_DLL
-	#define BK_API __declspec(dllexport)
+#ifdef BK_PLATFORM_WINDOWS
+	#ifdef BK_BUILD_DLL
+		#define BK_API __declspec(dllexport)
+	#else
+		#define BK_API __declspec(dllimport)
+	#endif
 #else
-	#define BK_API __declspec(dllimport)
+	#error The BadKey engine only supports windows
 #endif
