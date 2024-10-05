@@ -22,6 +22,9 @@ project "Imagelyn"
 
     cppdialect "C++17"
 
+    pchheader "imagelynpch.h"
+    pchsource "Imagelyn/src/imagelynpch.cpp"
+
     files
     {
         "%{prj.name}/src/**.h",
@@ -30,7 +33,8 @@ project "Imagelyn"
 
     includedirs
     {
-        "BadKey/src"
+        "BadKey/src",
+        "Imagelyn/src"
     }
 
     links
@@ -49,6 +53,12 @@ project "Imagelyn"
     filter "configurations:Distribution"
         defines { "BK_DISTRIBUTION" }
         optimize "On"
+
+    filter { "system:windows" }
+        defines { "PLATFORM_WINDOWS" }
+
+    filter { "system:macosx" }
+        defines { "PLATFORM_MACOSX" }
 
 project "BadKey"
 

@@ -1,10 +1,8 @@
 #pragma once
+#include "imagelynpch.h"
 
-#include "Client.h"
 #include "LocationManager.h"
-#include "Menu.h"
-
-#include <memory>
+#include "Client.h"
 
 namespace Imagelyn {
 
@@ -36,6 +34,7 @@ namespace Imagelyn {
 
 		inline std::string& GetName() { return m_Name; }
 		inline std::shared_ptr<Location> GetLocation() { return m_Location; }
+		inline const std::vector<std::shared_ptr<Activity>>& GetCurrentActivities() const { return m_CurrentActivites; }
 
 		/* Creates and opens a menu for adding/removing days from this stop */
 		void OpenStopMenu();
@@ -54,7 +53,7 @@ namespace Imagelyn {
 		std::vector<std::shared_ptr<Location>> m_AvailableLocations;
 
 		/* A list of all stops on the trip */
-		std::vector<Stop> m_Stops;
+		std::vector<std::shared_ptr<Stop>> m_Stops;
 
 	public:
 
@@ -62,6 +61,8 @@ namespace Imagelyn {
 
 		/* Creates and opens a menu for displaying client info, adding/removing destinations, and finalizing the trip */
 		void OpenPlanningMenu();
+
+		inline const Client& GetClient() { return m_Client; }
 
 	};
 

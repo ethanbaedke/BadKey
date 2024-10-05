@@ -1,8 +1,5 @@
 #pragma once
-
-#include <BadKey.h>
-#include <vector>
-#include <memory>
+#include "imagelynpch.h"
 
 namespace Imagelyn {
 
@@ -33,6 +30,9 @@ namespace Imagelyn {
 
 		/* Returns the preference object with the input name if it exists in the list, nullptr otherwise */
 		static std::shared_ptr<Preference> GetPreferenceByName(const std::string& preferenceName);
+
+		/* Returns a random preference */
+		static std::shared_ptr<Preference> GetRandomPreference();
 
 	private:
 

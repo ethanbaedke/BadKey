@@ -1,3 +1,5 @@
+#include "imagelynpch.h"
+
 #include "PreferenceManager.h"
 
 namespace Imagelyn {
@@ -37,6 +39,15 @@ namespace Imagelyn {
 			return m_Preferences[i];
 		else
 			return nullptr;
+	}
+
+	std::shared_ptr<Preference> PreferenceManager::GetRandomPreference()
+	{
+		std::random_device rd;
+		std::mt19937 gen(rd());
+		std::uniform_int_distribution<int> nameDist(0, m_Preferences.size() - 1);
+		int index = nameDist(gen);
+		return m_Preferences[index];
 	}
 
 

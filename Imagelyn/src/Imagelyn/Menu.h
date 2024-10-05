@@ -1,6 +1,5 @@
 #pragma once
-
-#include <BadKey.h>
+#include "imagelynpch.h"
 
 namespace Imagelyn {
 

@@ -1,6 +1,7 @@
 #pragma once
+#include "imagelynpch.h"
 
-#include <BadKey.h>
+#include "PreferenceManager.h"
 
 // List of all possible names for clients
 static const std::string s_Names[] = { "Ethan", "Dylan", "Morgan", "Nicole", "William", "Zoey", "Max", "Aiden", "Madelyn", "Ceci",
@@ -18,11 +19,14 @@ namespace Imagelyn {
 
 		std::string m_Name;
 
+		std::vector<std::shared_ptr<Preference>> m_Preferences;
+
 	public:
 
 		Client();
 
 		std::string GetName() const;
+		inline const std::vector<std::shared_ptr<Preference>>& GetPreferences() const { return m_Preferences; }
 
 		/* Prints all information about the client */
 		void PrintClient() const;

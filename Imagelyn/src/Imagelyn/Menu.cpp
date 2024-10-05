@@ -1,3 +1,5 @@
+#include "imagelynpch.h"
+
 #include "Menu.h"
 #include "ConsoleManager.h"
 
@@ -30,7 +32,7 @@ namespace Imagelyn {
 			ConsoleManager::Log(std::to_string(i + 1) + ": " + m_Options[i].optionText, m_Options[i].optionColor);
 		}
 
-		std::cout << std::endl;
+		ConsoleManager::BreakLine();
 
 		int selection = ConsoleManager::GetInt(1, m_Options.size(), "Input", COLOR_DEFAULT);
 

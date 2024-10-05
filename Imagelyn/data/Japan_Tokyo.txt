@@ -1,7 +1,7 @@
 location "Tokyo, Japan"
 activity "Visit the Tsukiji Fish Market"
 preference+ "Likes trying new foods"
-preference- "Allergic to seafood"
+preference- "Allergic to certain ingredients"
 activity "Explore the Tokyo National Museum"
 preference+ "Enjoys historical sites"
 preference- "Dislikes museums"
