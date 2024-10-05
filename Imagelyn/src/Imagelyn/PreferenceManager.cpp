@@ -2,6 +2,8 @@
 
 #include "PreferenceManager.h"
 
+#include <BadKey.h>
+
 namespace Imagelyn {
 
 	std::vector<std::shared_ptr<Preference>> PreferenceManager::m_Preferences;
@@ -48,6 +50,16 @@ namespace Imagelyn {
 		std::uniform_int_distribution<int> nameDist(0, m_Preferences.size() - 1);
 		int index = nameDist(gen);
 		return m_Preferences[index];
+	}
+
+	bool PreferenceManager::ValidPreferenceInit()
+	{
+		if (m_Preferences.size() < 3)
+		{
+			BK_ERROR("At least three preferences must be defined for a valid game");
+			return false;
+		}
+		return true;
 	}
 
 

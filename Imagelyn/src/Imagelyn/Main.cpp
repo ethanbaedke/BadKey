@@ -17,7 +17,11 @@ namespace Imagelyn {
 
 		ImagelynApplication()
 		{
-			LoadData();
+			if (!LoadData())
+				return;
+
+			if (!PreferenceManager::ValidPreferenceInit())
+				return;
 
 			while (true)
 			{
@@ -56,19 +60,22 @@ namespace Imagelyn {
 	private:
 
 		/* Load all important files and populate objects with their data */
-		void LoadData()
+		bool LoadData()
 		{
 			// Load preference data
-			FileInterpreter::Load("data/PreferenceInit.txt");
+			if (!FileInterpreter::Load("data/PreferenceInit.txt"))
+				return false;
 
 			// Load location data
 			for (const std::filesystem::directory_entry& file : std::filesystem::directory_iterator("data"))
 			{
 				if (file.is_regular_file() && file.path().extension() == ".txt" && file.path().filename().string() != "PreferenceInit.txt")
 				{
-					FileInterpreter::Load("data/" + file.path().filename().string());
+					if (FileInterpreter::Load("data/" + file.path().filename().string()))
+						return false;
 				}
 			}
+			return true;
 		}
 
 	};

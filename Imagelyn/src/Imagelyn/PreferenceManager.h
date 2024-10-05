@@ -34,6 +34,12 @@ namespace Imagelyn {
 		/* Returns a random preference */
 		static std::shared_ptr<Preference> GetRandomPreference();
 
+		/*
+		* Returns true if the preference manager is ready for the game to be played
+		* This returns false in cases where the preference manager doesn't have enough valid preferences for the game to run correctly
+		*/
+		static bool ValidPreferenceInit();
+
 	private:
 
 		static std::vector<std::shared_ptr<Preference>> m_Preferences;
