@@ -12,14 +12,8 @@ namespace Imagelyn {
 
 	void Menu::AddOption(const std::string& text, const char* color, std::function<void()> func)
 	{
-		// Create the new option
-		MenuOption newOption;
-		newOption.optionText = text;
-		newOption.optionColor = color;
-		newOption.optionFunction = func;
-
-		// Add it to the list
-		m_Options.push_back(newOption);
+		// Create the new option and add it to the list
+		m_Options.push_back(MenuOption(text, color, func));
 	}
 
 	void Menu::Poll() const
@@ -29,7 +23,7 @@ namespace Imagelyn {
 		// Display the option number and text of each option
 		for (int i = 0; i < m_Options.size(); i++)
 		{
-			ConsoleManager::Log(std::to_string(i + 1) + ": " + m_Options[i].optionText, m_Options[i].optionColor);
+			ConsoleManager::Log(std::to_string(i + 1) + ": " + m_Options[i].m_OptionText, m_Options[i].m_OptionColor);
 		}
 
 		ConsoleManager::BreakLine();
@@ -46,7 +40,7 @@ namespace Imagelyn {
 		if (index < m_Options.size() && index >= 0)
 		{
 			// Call the function on the selected option
-			m_Options[index].optionFunction();
+			m_Options[index].m_OptionFunction();
 		}
 		else
 		{

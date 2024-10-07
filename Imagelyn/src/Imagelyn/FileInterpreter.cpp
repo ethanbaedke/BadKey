@@ -1,6 +1,7 @@
 #include "imagelynpch.h"
 
 #include "FileInterpreter.h"
+#include "Client.h"
 
 #include <fstream>
 
@@ -83,7 +84,7 @@ namespace Imagelyn {
 		return (character > 0x40 && character < 0x5B) || (character > 0x60 && character < 0x7B);
 	}
 
-	std::string FileInterpreter::ParseKeyword(std::ifstream& file, std::string& errorMessage)
+	const std::string FileInterpreter::ParseKeyword(std::ifstream& file, std::string& errorMessage)
 	{
 		char byte = 0x00;
 
@@ -118,7 +119,7 @@ namespace Imagelyn {
 		return keyword;
 	}
 
-	std::string FileInterpreter::ParseString(std::ifstream& file, std::string& errorMessage)
+	const std::string FileInterpreter::ParseString(std::ifstream& file, std::string& errorMessage)
 	{
 		char byte = 0x00;
 
@@ -198,21 +199,6 @@ namespace Imagelyn {
 				m_CurrentLocation->AddActivity(m_CurrentActivity);
 			}
 		}
-		else if (keyword == "description")
-		{
-			// If there is no active activity for this description to be added to, set an error message and return
-			if (m_CurrentActivity == nullptr)
-			{
-				errorMessage = "Activity must be defined before description";
-				return;
-			}
-
-			std::string description = ParseString(file, errorMessage);
-
-			// The actual error message will be handeled outside of this function, we just make sure there isn't one before we add the description to our current activity
-			if (errorMessage == "")
-				m_CurrentActivity->SetDescription(description);
-		}
 		else if (keyword == "preference+")
 		{
 			// If there is no active activity for this preference to be added to, set an error message and return
@@ -284,6 +270,14 @@ namespace Imagelyn {
 				if (!PreferenceManager::AddPreference(p))
 					errorMessage = "Preference (" + preference + ") defined more than once";
 			}
+		}
+		else if (keyword == "name")
+		{
+			std::string name = ParseString(file, errorMessage);
+
+			// The actual error message will be handeled outside of this function, we just make sure there isn't one before we add the name object
+			if (errorMessage == "")
+				ClientManager::AddName(name);
 		}
 		else
 		{

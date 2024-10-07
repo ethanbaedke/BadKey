@@ -10,9 +10,14 @@ namespace Imagelyn {
 
 		struct MenuOption
 		{
-			std::string optionText;
-			const char* optionColor;
-			std::function<void()> optionFunction;
+			std::string m_OptionText;
+			const char* m_OptionColor;
+			std::function<void()> m_OptionFunction;
+
+			MenuOption(const std::string& optionText, const char* optionColor, std::function<void()> optionFunction)
+				: m_OptionText(optionText), m_OptionColor(optionColor), m_OptionFunction(optionFunction)
+			{
+			}
 		};
 
 	private:

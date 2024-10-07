@@ -1,6 +1,6 @@
 #include "imagelynpch.h"
 
-#include "ReportManager.h"
+#include "Report.h"
 #include "ConsoleManager.h"
 
 namespace Imagelyn {

@@ -57,25 +57,6 @@ namespace Imagelyn {
 		}
 	}
 
-	std::string ConsoleManager::GetString(const std::string& prompt, const char* color)
-	{
-		std::cout << color << prompt << ": ";
-
-		// Get user input
-		std::string input;
-		std::getline(std::cin, input);
-
-		//Input is empty
-		if (input.length() == 0)
-		{
-			BK_WARNING(std::string("Please input your selection"));
-			return GetString(prompt, color);
-		}
-
-		CONSOLE_CLEAR();
-		return input;
-	}
-
 	void ConsoleManager::BreakLine()
 	{
 		std::cout << std::endl;

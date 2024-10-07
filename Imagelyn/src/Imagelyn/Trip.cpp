@@ -3,7 +3,7 @@
 #include "Trip.h"
 #include "ConsoleManager.h"
 #include "Menu.h"
-#include "ReportManager.h"
+#include "Report.h"
 
 namespace Imagelyn {
 
@@ -17,7 +17,7 @@ namespace Imagelyn {
 		m_OwningTrip->GetClient().PrintClient();
 
 		// Print all currently added activities
-		for (std::shared_ptr<Activity>& act : m_CurrentActivites)
+		for (const std::shared_ptr<Activity>& act : m_CurrentActivites)
 		{
 			ConsoleManager::Log(act->GetName(), COLOR_ACTIVITY);
 		}

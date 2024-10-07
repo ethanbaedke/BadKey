@@ -23,12 +23,21 @@ namespace Imagelyn {
 			if (!PreferenceManager::ValidPreferenceInit())
 				return;
 
+			if (!ClientManager::ValidClientInit())
+				return;
+
 			while (true)
 			{
 				ConsoleManager::BreakLine();
 
 				// Generate 3 potential clients
 				Client potentialClients[3];
+
+				// Regenerate clients with matching names
+				while (potentialClients[1].GetName() == potentialClients[0].GetName())
+					potentialClients[1] = Client();
+				while (potentialClients[2].GetName() == potentialClients[1].GetName() || potentialClients[2].GetName() == potentialClients[0].GetName())
+					potentialClients[2] = Client();
 
 				// Create client selection menu
 				Menu clientSelectMenu = Menu("Select a client");
@@ -66,12 +75,16 @@ namespace Imagelyn {
 			if (!FileInterpreter::Load("data/PreferenceInit.txt"))
 				return false;
 
+			// Load name data
+			if (!FileInterpreter::Load("data/NameInit.txt"))
+				return false;
+
 			// Load location data
 			for (const std::filesystem::directory_entry& file : std::filesystem::directory_iterator("data"))
 			{
 				if (file.is_regular_file() && file.path().extension() == ".txt" && file.path().filename().string() != "PreferenceInit.txt")
 				{
-					if (FileInterpreter::Load("data/" + file.path().filename().string()))
+					if (!FileInterpreter::Load("data/" + file.path().filename().string()))
 						return false;
 				}
 			}

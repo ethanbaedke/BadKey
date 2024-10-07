@@ -1,7 +1,7 @@
 #pragma once
 #include "imagelynpch.h"
 
-#include "LocationManager.h"
+#include "Location.h"
 #include "Client.h"
 
 namespace Imagelyn {
@@ -32,8 +32,8 @@ namespace Imagelyn {
 
 		Stop(const std::string& name, std::shared_ptr<Location> location, Trip* trip);
 
-		inline std::string& GetName() { return m_Name; }
-		inline std::shared_ptr<Location> GetLocation() { return m_Location; }
+		inline const std::string& GetName() const { return m_Name; }
+		inline std::shared_ptr<Location> GetLocation() const { return m_Location; }
 		inline const std::vector<std::shared_ptr<Activity>>& GetCurrentActivities() const { return m_CurrentActivites; }
 
 		/* Creates and opens a menu for adding/removing days from this stop */

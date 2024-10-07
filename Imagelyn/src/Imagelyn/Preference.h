@@ -3,19 +3,18 @@
 
 namespace Imagelyn {
 
-	class Preference : BadKey::IPrintable
+	class Preference
 	{
 
 	public:
 
 		Preference(std::string name);
 
-		inline const std::string& GetName() { return m_Name; }
-
-		virtual std::string GetPrintable() const;
+		inline const std::string& GetName() const { return m_Name; }
 
 	private:
 
+		/* The name of this preference */
 		std::string m_Name;
 
 	};

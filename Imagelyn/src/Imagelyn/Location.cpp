@@ -1,9 +1,10 @@
 #include "imagelynpch.h"
 
-#include "LocationManager.h"
+#include "Location.h"
 
 namespace Imagelyn {
 
+	// Declare static variables
 	std::vector<std::shared_ptr<Location>> LocationManager::m_Locations;
 
 	Location::Location(std::string name)
@@ -16,24 +17,12 @@ namespace Imagelyn {
 		m_Activities.push_back(activity);
 	}
 
-	std::string Location::GetPrintable() const
-	{
-		// Debug the name of this location
-		std::string debug = "Location: " + m_Name;
-
-		// Debug all activites of this location
-		for (const std::shared_ptr<Activity> act : m_Activities)
-			debug += "\n" + act->GetPrintable();
-
-		return debug;
-	}
-
 	Activity::Activity(std::string name)
-		: m_Name(name), m_Description("(none)")
+		: m_Name(name)
 	{
 	}
 
-	std::vector<std::shared_ptr<Preference>> Activity::GetPositivePreferences()
+	const std::vector<std::shared_ptr<Preference>> Activity::GetPositivePreferences() const
 	{
 		std::vector<std::shared_ptr<Preference>> prefs;
 		for (const Hint& h : m_PositiveHints)
@@ -43,7 +32,7 @@ namespace Imagelyn {
 		return prefs;
 	}
 
-	std::vector<std::shared_ptr<Preference>> Activity::GetNegativePreferences()
+	const std::vector<std::shared_ptr<Preference>> Activity::GetNegativePreferences() const
 	{
 		std::vector<std::shared_ptr<Preference>> prefs;
 		for (const Hint& h : m_NegativeHints)
@@ -71,7 +60,7 @@ namespace Imagelyn {
 			m_NegativeHints[i].m_Unlocked = true;
 	}
 
-	std::vector<std::shared_ptr<Preference>> Activity::GetPositiveUnlockedHints()
+	const std::vector<std::shared_ptr<Preference>> Activity::GetPositiveUnlockedHints() const
 	{
 		std::vector<std::shared_ptr<Preference>> prefs;
 		for (const Hint& h : m_PositiveHints)
@@ -82,7 +71,7 @@ namespace Imagelyn {
 		return prefs;
 	}
 
-	std::vector<std::shared_ptr<Preference>> Activity::GetNegativeUnlockedHints()
+	const std::vector<std::shared_ptr<Preference>> Activity::GetNegativeUnlockedHints() const
 	{
 		std::vector<std::shared_ptr<Preference>> prefs;
 		for (const Hint& h : m_NegativeHints)
@@ -91,27 +80,6 @@ namespace Imagelyn {
 				prefs.push_back(h.m_Preference);
 		}
 		return prefs;
-	}
-
-	std::string Activity::GetPrintable() const
-	{
-		// Debug the name of this activity
-		std::string debug = "Activity: " + m_Name;
-		
-		// Debug the description of this activity
-		debug += "\n" + std::string("Description: ") + m_Description;
-
-		// Debug the positive and negative preferences of this activity
-		for (Hint h : m_PositiveHints)
-		{
-			debug += "\n(+)" + h.m_Preference->GetPrintable();
-		}
-		for (Hint h : m_NegativeHints)
-		{
-			debug += "\n(-)" + h.m_Preference->GetPrintable();
-		}
-
-		return debug;
 	}
 
 	void LocationManager::AddLocation(std::shared_ptr<Location> location)

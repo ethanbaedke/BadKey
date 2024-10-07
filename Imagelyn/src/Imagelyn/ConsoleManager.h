@@ -26,9 +26,6 @@ namespace Imagelyn {
 		/* Gets a single integer input from the user between the input bounds */
 		static int GetInt(unsigned int lower, unsigned int upper, const std::string& prompt, const char* color);
 
-		/* Gets text input from the user, displays the input prompt prior to retrieving input */
-		static std::string GetString(const std::string& prompt, const char* color);
-
 		/* Adds a break in the console */
 		static void BreakLine();
 

@@ -1,11 +1,11 @@
 #pragma once
 #include "imagelynpch.h"
 
-#include "PreferenceManager.h"
+#include "Preference.h"
 
 namespace Imagelyn {
 
-	class Activity : BadKey::IPrintable
+	class Activity
 	{
 
 	private:
@@ -24,54 +24,53 @@ namespace Imagelyn {
 
 	public:
 
-		Activity(std::string name);
+		Activity(const std::string name);
 
-		std::vector<std::shared_ptr<Preference>> GetPositivePreferences();
-		std::vector<std::shared_ptr<Preference>> GetNegativePreferences();
+		const std::vector<std::shared_ptr<Preference>> GetPositivePreferences() const;
+		const std::vector<std::shared_ptr<Preference>> GetNegativePreferences() const;
 
 		/* Unlocks the hint on this activity for the input preference */
 		void UnlockPositiveHint(std::shared_ptr<Preference> preference);
 		void UnlockNegativeHint(std::shared_ptr<Preference> preference);
 
 		/* Gets the unlocked hints to be displayed for this activity */
-		std::vector<std::shared_ptr<Preference>> GetPositiveUnlockedHints();
-		std::vector<std::shared_ptr<Preference>> GetNegativeUnlockedHints();
+		const std::vector<std::shared_ptr<Preference>> GetPositiveUnlockedHints() const;
+		const std::vector<std::shared_ptr<Preference>> GetNegativeUnlockedHints() const;
 
 		inline void AddPositivePreference(std::shared_ptr<Preference> preference) { m_PositiveHints.push_back(Hint(preference)); }
 		inline void AddNegativePreference(std::shared_ptr<Preference> preference) { m_NegativeHints.push_back(Hint(preference)); }
-		inline const std::string& GetName() { return m_Name; }
-		inline void SetDescription(std::string description) { m_Description = description; }
-
-		virtual std::string GetPrintable() const;
+		inline const std::string& GetName() const { return m_Name; }
 
 	private:
 
+		/* Name of this activity */
 		std::string m_Name;
-		std::string m_Description;
 
+		/* Preferences this activity is bound with contained in hints */
 		std::vector<Hint> m_PositiveHints;
 		std::vector<Hint> m_NegativeHints;
 
 	};
 
-	class Location : BadKey::IPrintable
+	class Location
 	{
 
 	public:
 
 		Location(std::string name);
 
+		/* Add an activity to this location */
 		void AddActivity(const std::shared_ptr<Activity> activity);
 
-		inline std::string& GetName() { return m_Name; }
-		inline std::vector<std::shared_ptr<Activity>>& GetActivities() { return m_Activities; }
-
-		virtual std::string GetPrintable() const;
+		inline const std::string& GetName() const { return m_Name; }
+		inline const std::vector<std::shared_ptr<Activity>>& GetActivities() const { return m_Activities; }
 
 	private:
 
+		/* Name of this location */
 		std::string m_Name;
 
+		/* List of activities that can be selected from this location */
 		std::vector<std::shared_ptr<Activity>> m_Activities;
 	};
 
@@ -80,12 +79,14 @@ namespace Imagelyn {
 
 	public:
 
+		/* Adds a location to the game */
 		static void AddLocation(std::shared_ptr<Location> location);
 
 		static inline const std::vector<std::shared_ptr<Location>>& GetLocations() { return m_Locations; }
 
 	private:
 
+		/* List of all locations available in the game */
 		static std::vector<std::shared_ptr<Location>> m_Locations;
 
 	};

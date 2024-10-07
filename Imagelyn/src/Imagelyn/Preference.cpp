@@ -1,21 +1,17 @@
 #include "imagelynpch.h"
 
-#include "PreferenceManager.h"
+#include "Preference.h"
 
 #include <BadKey.h>
 
 namespace Imagelyn {
 
+	// Declare static variables
 	std::vector<std::shared_ptr<Preference>> PreferenceManager::m_Preferences;
 
 	Preference::Preference(std::string name)
 		: m_Name(name)
 	{
-	}
-
-	std::string Preference::GetPrintable() const
-	{
-		return "Preference: " + m_Name;
 	}
 
 	bool PreferenceManager::AddPreference(std::shared_ptr<Preference> preference)
