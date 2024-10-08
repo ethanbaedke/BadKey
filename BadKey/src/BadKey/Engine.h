@@ -1,4 +1,5 @@
 #pragma once
+#include "bkpch.h"
 
 #ifdef BK_PLATFORM_WINDOWS
 	#ifdef BK_BUILD_DLL

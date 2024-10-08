@@ -1,6 +1,6 @@
 #pragma once
-
 #include "bkpch.h"
+
 #include "Engine.h"
 
 #define BK_MESSAGE(x)			BadKey::Console::Log(BadKey::LogType::MESSAGE, "[Client]", x)

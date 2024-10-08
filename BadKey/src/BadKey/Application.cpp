@@ -1,3 +1,5 @@
+#include "bkpch.h"
+
 #include "Application.h"
 #include "Console.h"
 

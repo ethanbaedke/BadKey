@@ -1,3 +1,5 @@
+#include "bkpch.h"
+
 #include "Event.h"
 
 #define DEBUG_EVENT(typeName) std::string("Event: type = \"") + typeName + "\""

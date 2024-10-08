@@ -1,4 +1,5 @@
 #pragma once
+#include "bkpch.h"
 
 #include "BadKey/Application.h"
 
