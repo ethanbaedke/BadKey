@@ -56,7 +56,7 @@ namespace Imagelyn {
 		// Three names must be present so three clients with unique names can be chosen
 		if (m_Names.size() < 3)
 		{
-			BK_ERROR("At least three names must be defined for a valid game");
+			ConsoleManager::Error("At least three names must be defined for a valid game");
 			return false;
 		}
 		return true;

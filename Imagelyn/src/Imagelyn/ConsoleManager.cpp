@@ -22,7 +22,7 @@ namespace Imagelyn {
 		// Input is empty
 		if (input.length() == 0)
 		{
-			BK_WARNING(std::string("Please input your selection"));
+			Warning(std::string("Please input your selection"));
 			return GetInt(lower, upper, prompt, color);
 		}
 
@@ -38,7 +38,7 @@ namespace Imagelyn {
 			}
 			else
 			{
-				BK_WARNING("Your input contains invalid characters, please use digits 0-9");
+				Warning("Your input contains invalid characters, please use digits 0-9");
 				return GetInt(lower, upper, prompt, color);
 			}
 		}
@@ -52,7 +52,7 @@ namespace Imagelyn {
 		else
 		{
 			// If the input value is out of our bounds, try again
-			BK_WARNING(std::string("Please input a value between ") + std::to_string(lower) + " and " + std::to_string(upper));
+			Warning(std::string("Please input a value between ") + std::to_string(lower) + " and " + std::to_string(upper));
 			return GetInt(lower, upper, prompt, color);
 		}
 	}
@@ -60,6 +60,21 @@ namespace Imagelyn {
 	void ConsoleManager::BreakLine()
 	{
 		std::cout << std::endl;
+	}
+
+	void ConsoleManager::Message(const std::string& message)
+	{
+		std::cout << "\033[38;2;104;174;212m" << message << std::endl;
+	}
+
+	void ConsoleManager::Warning(const std::string& message)
+	{
+		std::cout << "\033[38;2;255;255;0m" << message << std::endl;
+	}
+
+	void ConsoleManager::Error(const std::string& message)
+	{
+		std::cout << "\033[38;2;255;0;0m" << message << std::endl;
 	}
 
 }

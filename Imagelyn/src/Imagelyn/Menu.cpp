@@ -44,7 +44,7 @@ namespace Imagelyn {
 		}
 		else
 		{
-			BK_WARNING("The choosen selection does not exist in the menu");
+			ConsoleManager::Warning("The choosen selection does not exist in the menu");
 		}
 	}
 

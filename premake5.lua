@@ -1,4 +1,4 @@
-workspace "BadKey"
+workspace "Imagelyn"
 
     architecture "x64"
 
@@ -28,18 +28,13 @@ project "Imagelyn"
     files
     {
         "%{prj.name}/src/**.h",
-        "%{prj.name}/src/**.cpp"
+        "%{prj.name}/src/**.cpp",
+        "%{prj.name}/data/*.txt"
     }
 
     includedirs
     {
-        "BadKey/src",
         "Imagelyn/src"
-    }
-
-    links
-    {
-        "BadKey"
     }
 
     filter "configurations:Debug"
@@ -59,40 +54,3 @@ project "Imagelyn"
 
     filter { "system:macosx" }
         defines { "PLATFORM_MACOSX" }
-
-project "BadKey"
-
-    location "BadKey"
-    kind "SharedLib"
-    language "C++"
-
-    targetdir ("bin/" .. outputPath .. "/%{prj.name}")
-    objdir ("bin-int/" .. outputPath .. "/%{prj.name}")
-
-    files
-    {
-        "%{prj.name}/src/**.h",
-        "%{prj.name}/src/**.cpp"
-    }
-
-    defines
-    {
-        "BK_BUILD_DLL"
-    }
-
-    postbuildcommands
-    {
-        ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputPath .. "/Imagelyn")
-    }
-
-    filter "configurations:Debug"
-        defines { "BK_DEBUG" }
-        symbols "On"
-
-    filter "configurations:Release"
-        defines { "BK_RELEASE" }
-        optimize "On"
-
-    filter "configurations:Distribution"
-        defines { "BK_DISTRIBUTION" }
-        optimize "On"

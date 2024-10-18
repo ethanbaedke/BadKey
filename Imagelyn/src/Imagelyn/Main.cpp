@@ -10,7 +10,7 @@
 
 namespace Imagelyn {
 
-	class ImagelynApplication : public BadKey::Application
+	class ImagelynApplication
 	{
 
 	public:
@@ -98,7 +98,6 @@ namespace Imagelyn {
 int main()
 {
 	Imagelyn::ImagelynApplication* app = new Imagelyn::ImagelynApplication();
-	app->Run();
 	delete app;
 
 	return 0;

@@ -2,6 +2,7 @@
 
 #include "FileInterpreter.h"
 #include "Client.h"
+#include "ConsoleManager.h"
 
 #include <fstream>
 
@@ -21,7 +22,7 @@ namespace Imagelyn {
 		// Make sure the file was found and opened correctly
 		if (!file.is_open())
 		{
-			BK_ERROR(std::string("Could not open file: ") + path);
+			ConsoleManager::Error(std::string("Could not open file: ") + path);
 			return false;
 		}
 
@@ -45,13 +46,13 @@ namespace Imagelyn {
 			else if (errorMessage[0] == '~')
 			{
 				std::string warning = errorMessage.substr(1, errorMessage.size());
-				BK_WARNING(errorOutput + warning);
+				ConsoleManager::Warning(errorOutput + warning);
 				errorMessage = "";
 			}
 			// If there was an error parsing for a keyword, print it and return
 			else if (errorMessage != "")
 			{
-				BK_ERROR(errorOutput + errorMessage);
+				ConsoleManager::Error(errorOutput + errorMessage);
 				return false;
 			}
 
@@ -61,19 +62,19 @@ namespace Imagelyn {
 			if (errorMessage[0] == '~')
 			{
 				std::string warning = errorMessage.substr(1, errorMessage.size());
-				BK_WARNING(errorOutput + warning);
+				ConsoleManager::Warning(errorOutput + warning);
 				errorMessage = "";
 			}
 			// If there was an error handling our keyword, print it and return
 			else if (errorMessage != "")
 			{
-				BK_ERROR(errorOutput + errorMessage);
+				ConsoleManager::Error(errorOutput + errorMessage);
 				return false;
 			}
 		}
 
 		// File successfullly interpreted
-		BK_MESSAGE("File " + path + " loaded successfully");
+		ConsoleManager::Message("File " + path + " loaded successfully");
 		if (m_CurrentLocation)
 			LocationManager::AddLocation(m_CurrentLocation);
 		return true;

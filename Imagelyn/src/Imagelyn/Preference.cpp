@@ -1,8 +1,7 @@
 #include "imagelynpch.h"
 
 #include "Preference.h"
-
-#include <BadKey.h>
+#include "ConsoleManager.h"
 
 namespace Imagelyn {
 
@@ -52,7 +51,7 @@ namespace Imagelyn {
 	{
 		if (m_Preferences.size() < 3)
 		{
-			BK_ERROR("At least three preferences must be defined for a valid game");
+			ConsoleManager::Error("At least three preferences must be defined for a valid game");
 			return false;
 		}
 		return true;
