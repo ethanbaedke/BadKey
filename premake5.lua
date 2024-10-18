@@ -11,14 +11,19 @@ workspace "BadKey"
 
 outputPath = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
-project "Game"
+project "Imagelyn"
 
-    location "Game"
+    location "Imagelyn"
     kind "ConsoleApp"
     language "C++"
 
     targetdir ("bin/" .. outputPath .. "/%{prj.name}")
     objdir ("bin-int/" .. outputPath .. "/%{prj.name}")
+
+    cppdialect "C++17"
+
+    pchheader "imagelynpch.h"
+    pchsource "Imagelyn/src/imagelynpch.cpp"
 
     files
     {
@@ -28,20 +33,14 @@ project "Game"
 
     includedirs
     {
-        "BadKey/src"
+        "BadKey/src",
+        "Imagelyn/src"
     }
 
     links
     {
         "BadKey"
     }
-
-    filter "system:windows"
-    
-        defines
-        {
-            "BK_PLATFORM_WINDOWS"
-        }
 
     filter "configurations:Debug"
         defines { "BK_DEBUG" }
@@ -55,6 +54,12 @@ project "Game"
         defines { "BK_DISTRIBUTION" }
         optimize "On"
 
+    filter { "system:windows" }
+        defines { "PLATFORM_WINDOWS" }
+
+    filter { "system:macosx" }
+        defines { "PLATFORM_MACOSX" }
+
 project "BadKey"
 
     location "BadKey"
@@ -64,18 +69,10 @@ project "BadKey"
     targetdir ("bin/" .. outputPath .. "/%{prj.name}")
     objdir ("bin-int/" .. outputPath .. "/%{prj.name}")
 
-    pchheader "bkpch.h"
-    pchsource "BadKey/src/bkpch.cpp"
-
     files
     {
         "%{prj.name}/src/**.h",
         "%{prj.name}/src/**.cpp"
-    }
-
-    includedirs
-    {
-        "BadKey/src"
     }
 
     defines
@@ -83,17 +80,10 @@ project "BadKey"
         "BK_BUILD_DLL"
     }
 
-    filter "system:windows"
-
-        defines
-        {
-            "BK_PLATFORM_WINDOWS"
-        }
-
-        postbuildcommands
-        {
-            ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputPath .. "/Game")
-        }
+    postbuildcommands
+    {
+        ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputPath .. "/Imagelyn")
+    }
 
     filter "configurations:Debug"
         defines { "BK_DEBUG" }
