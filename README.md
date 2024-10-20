@@ -1,11 +1,11 @@
-# BadKey
+# Imagelyn
 
-Build Instructions
+# Build Instructions
 1) Clone the repository on to your Windows(x64) machine
 2) Run the GenerateProject.bat file
 3) Open the Imagelyn.sln file it generates
 
-Game Customization Instructions
+# Game Customization Instructions
 1) Open the data folder, all changes will be made in this folder. Do not modify any files outside of this folder.
 2) Modify the PreferenceInit and NameInit text files for your game. These are both abosultely necessary for the game to run and should not be deleted. Documentation for these files is shown below.
 
